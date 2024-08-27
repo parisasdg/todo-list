@@ -1,0 +1,26 @@
+<ng-container class="container">
+  @if (completedTasksList && completedTasksList.length > 0) {
+  <div>
+    @for (item of completedTasksList; track $index) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>
+          <span class="completed-task">Completed</span>
+          {{ item.title }}</mat-card-title
+        >
+        <span> {{ item.date }} </span>
+        <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <mat-icon class="icon">delete</mat-icon>
+      </mat-card-actions>
+    </mat-card>
+    }
+  </div>
+  }@else {
+  <div class="empty-box">
+    <img height="300px" src="assets/images/empty-box.svg" alt="" />
+    <p>تسک انجام شده‌ای وجود ندارد.</p>
+  </div>
+  }
+</ng-container>

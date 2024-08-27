@@ -1,0 +1,22 @@
+.icon {
+  padding: 0 8px;
+  color: #383a42;
+  cursor: pointer;
+}
+
+::ng-deep .mat-mdc-card-outlined {
+  margin: 16px 0px !important;
+}
+
+::ng-deep .mat-mdc-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+::ng-deep .mat-mdc-card-subtitle {
+  margin-top: 16px !important;
+}
+
+::ng-deep .mat-mdc-card-title {
+  cursor: pointer !important;
+}

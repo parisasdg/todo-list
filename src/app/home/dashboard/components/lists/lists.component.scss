@@ -1,0 +1,43 @@
+.container {
+  margin-top: 0px;
+}
+
+::ng-deep .mat-grid-tile-content {
+  flex-direction: column !important;
+  align-items: normal !important;
+  justify-content: normal !important;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+::ng-deep .mat-icon {
+  margin-left: 4px !important;
+}
+
+::ng-deep .mat-grid-tile-content {
+  padding: 16px 0px !important;
+}
+
+.todo-cards-container {
+  margin: 48px 16px 0px 16px;
+}
+
+.select-option {
+  margin: 0px 16px;
+  border-radius: 12px;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: white !important;
+  border: 1px solid #eaeaea !important;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between !important;
+}

@@ -1,0 +1,26 @@
+.container {
+  padding: 16px 200px;
+}
+
+.completed-task {
+  background-color: #ff325d;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 500px;
+  padding: 4px 16px;
+  margin: 4px 16px;
+}
+
+.icon {
+  padding: 0 8px;
+  color: #383a42;
+  cursor: pointer;
+}
+
+.empty-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
