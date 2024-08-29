@@ -1,3 +1,4 @@
+import { TaskItem } from '../../models/task.model';
 import { DashboardService } from './../../services/dashboard.service';
 import { Component, model, OnInit } from '@angular/core';
 
@@ -10,7 +11,7 @@ export class CompletedTasksComponent implements OnInit {
   readonly checked = model(false);
   readonly indeterminate = model(false);
   readonly labelPosition = model<'before' | 'after'>('after');
-  completedTasksList: any;
+  completedTasksList: TaskItem[] = [];
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -19,7 +20,7 @@ export class CompletedTasksComponent implements OnInit {
   }
 
   completedTasks() {
-    this.dashboardService.compeletedTask().subscribe((res) => {
+    this.dashboardService.getCompletedTasks().subscribe((res) => {
       this.completedTasksList = res;
     });
   }

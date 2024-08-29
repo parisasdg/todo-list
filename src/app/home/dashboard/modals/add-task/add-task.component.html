@@ -1,1 +1,26 @@
-<p>add-task works!</p>
+<h4 mat-dialog-title dir="rtl">افزودن تسک</h4>
+<mat-dialog-content>
+  <form class="example-form" [formGroup]="taskForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>عنوان</mat-label>
+      <input
+        class="input-style"
+        type="text"
+        matInput
+        formControlName="title"
+        required
+      />
+      @if ( taskForm.controls['title'].hasError('required')) {
+      <mat-error>وارد کردن عنوان <strong>ضروری</strong> است.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>توضیحات</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="start">
+  <button mat-flat-button (click)="onSubmit()">افزودن</button>
+  <button mat-button mat-dialog-close>انصراف</button>
+</mat-dialog-actions>

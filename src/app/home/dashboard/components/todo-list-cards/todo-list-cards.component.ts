@@ -1,4 +1,6 @@
 import { Component, model } from '@angular/core';
+import { TaskItem } from '../../models/task.model';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-todo-list-cards',
@@ -9,17 +11,23 @@ export class TodoListCardsComponent {
   readonly checked = model(false);
   readonly indeterminate = model(false);
   readonly labelPosition = model<'before' | 'after'>('after');
-  displayedColumns: string[] = ['title', 'date', 'description', 'actions'];
-  dataSource: any[] = [
-    {
-      title: 'Task 1',
-      date: '2024-08-15',
-      description: 'Description for Task 1',
-    },
-    {
-      title: 'Task 2',
-      date: '2024-08-15',
-      description: 'Description for Task 2',
-    },
-  ];
+
+  tasks: TaskItem[] = [];
+
+  constructor(private dashboardService: DashboardService) {}
+
+  ngOnInit(): void {
+    this.getTasks();
+  }
+
+  getTasks(): void {
+    this.dashboardService.getAllTasks().subscribe(
+      (res) => {
+        res.length > 0 ? (this.tasks = res) : null;
+      },
+      (err) => {
+        console.error('Error fetching tasks:', err);
+      }
+    );
+  }
 }

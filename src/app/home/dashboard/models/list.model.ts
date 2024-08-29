@@ -1,5 +1,5 @@
 export interface ListItem {
-  title: string;
+  title: string | null;
   date: Date;
   isMain: boolean;
 }

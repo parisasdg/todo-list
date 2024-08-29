@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddTaskComponent } from '../../modals/add-task/add-task.component';
 import { AddListComponent } from '../../modals/add-list/add-list.component';
 import { DashboardService } from '../../services/dashboard.service';
+import { ListItem } from '../../models/list.model';
 
 @Component({
   selector: 'app-lists',
@@ -12,7 +13,7 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 export class ListsComponent implements OnInit {
   readonly dialog = inject(MatDialog);
-  list: any;
+  list: ListItem[] = [];
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -22,7 +23,7 @@ export class ListsComponent implements OnInit {
 
   getLists() {
     this.dashboardService.getLists().subscribe((res) => {
-      this.list = res;
+      res.length > 0 ? (this.list = res) : null;
     });
   }
 

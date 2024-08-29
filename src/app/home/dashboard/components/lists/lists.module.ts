@@ -9,6 +9,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { ListsComponent } from './lists.component';
 import { TodoListCardsModule } from '../todo-list-cards/todo-list-cards.module';
+import { AddListModule } from '../../modals/add-list/add-list.module';
+import { AddTaskModule } from '../../modals/add-task/add-task.module';
 
 @NgModule({
   declarations: [ListsComponent],
@@ -22,6 +24,8 @@ import { TodoListCardsModule } from '../todo-list-cards/todo-list-cards.module';
     MatButtonModule,
     MatDialogModule,
     MatToolbarModule,
+    AddListModule,
+    AddTaskModule,
   ],
   exports: [ListsComponent],
 })
