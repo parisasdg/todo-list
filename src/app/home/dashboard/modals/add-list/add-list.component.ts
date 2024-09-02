@@ -34,7 +34,7 @@ export class AddListComponent implements OnInit {
 
   onSubmit() {
     if (this.listForm.valid) {
-      const newItem: ListItem = {
+      const newItem: any = {
         title: this.listForm.value.title,
         date: new Date(),
         isMain: false,

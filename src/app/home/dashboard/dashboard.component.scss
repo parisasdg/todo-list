@@ -5,16 +5,3 @@
 ::ng-deep .mat-mdc-tab-header {
   width: 500px;
 }
-
-::ng-deep .custom-tab-group .mat-tab-header {
-  transition: none !important;
-}
-
-::ng-deep .custom-tab-group .mat-tab-body {
-  transition: none !important;
-}
-
-/* Optionally, adjust the tab body content for a smooth transition */
-::ng-deep .custom-tab-group .mat-tab-body-content {
-  transition: none !important;
-}

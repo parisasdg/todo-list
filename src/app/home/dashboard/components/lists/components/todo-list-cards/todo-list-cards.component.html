@@ -16,7 +16,7 @@
   </mat-card-header>
   <mat-card-actions>
     <mat-icon class="icon">edit</mat-icon>
-    <mat-icon class="icon">delete</mat-icon>
+    <mat-icon class="icon" (click)="deleteTask(item._id)">delete</mat-icon>
   </mat-card-actions>
 </mat-card>
 

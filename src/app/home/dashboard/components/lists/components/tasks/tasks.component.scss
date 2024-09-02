@@ -1,0 +1,17 @@
+.container {
+  padding: 16px 200px;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+::ng-deep .mat-icon {
+  margin-left: 4px !important;
+}
+
+.todo-cards-container {
+  margin: 48px 16px 0px 16px;
+}

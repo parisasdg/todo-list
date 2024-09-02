@@ -1,38 +1,37 @@
-<mat-grid-list cols="4" rowHeight="100vh">
-  <mat-grid-tile [colspan]="3" [style.background]="'#F7F8F8'">
-    <mat-toolbar class="list-header" [style.background]="'#F7F8F8'">
-      <span>تسک های من</span>
-      <div>
-        <button mat-flat-button (click)="addTaskDialog()">
-          <mat-icon>add</mat-icon>
-          افزودن تسک
-        </button>
+<div class="container">
+  <mat-toolbar class="list-header" [style.background]="'#F7F8F8'">
+    <span>لیست ها</span>
+    <button mat-flat-button (click)="addListDialog()">
+      <mat-icon>add</mat-icon>
+      افزودن لیست
+    </button>
+  </mat-toolbar>
+  <mat-nav-list>
+    @for (item of list; track $index) {
+    <mat-list-item>
+      <div
+        *ngIf="editingIndex !== $index; else editMode"
+        (click)="openTaskList(item._id)"
+      >
+        {{ item.title }}
       </div>
-    </mat-toolbar>
-    <div class="todo-cards-container">
-      <app-todo-list-cards></app-todo-list-cards>
-    </div>
-  </mat-grid-tile>
-  <mat-grid-tile
-    [colspan]="1"
-    [style.background]="'#EDEEF1'"
-    [style.border]="'1px solid #E0E0E0'"
-  >
-    <mat-toolbar class="list-header" [style.background]="'#EDEEF1'">
-      <span>لیست ها</span>
-      <button mat-flat-button (click)="addListDialog()">
-        <mat-icon>add</mat-icon>
-        افزودن لیست
-      </button>
-    </mat-toolbar>
-    <mat-nav-list>
-      <mat-list-item>کارهای روزانه</mat-list-item>
-      @for (item of list; track $index) {
-      <mat-list-item>
-        <div>{{ item.title }}</div>
-        <mat-icon class="icon">edit</mat-icon>
-      </mat-list-item>
-      }
-    </mat-nav-list>
-  </mat-grid-tile>
-</mat-grid-list>
+      <ng-template #editMode>
+        <input
+          matInput
+          [(ngModel)]="updatedTitle"
+          (blur)="saveTitle($index)"
+          (keyup.enter)="saveTitle($index)"
+          (keyup.esc)="cancelEditing()"
+          autofocus
+        />
+      </ng-template>
+      <div *ngIf="!item.isMain && editingIndex !== $index">
+        <mat-icon class="icon" (click)="startEditing($index, item.title)"
+          >edit</mat-icon
+        >
+        <mat-icon class="icon" (click)="deleteList(item._id)">delete</mat-icon>
+      </div>
+    </mat-list-item>
+    }
+  </mat-nav-list>
+</div>

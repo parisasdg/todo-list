@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
   },
+  {
+    path: 'dashboard/:id',
+    loadChildren: () =>
+      import(
+        './home/dashboard/components/lists/components/tasks/tasks.module'
+      ).then((m) => m.TasksModule),
+  },
 
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];

@@ -1,0 +1,14 @@
+<div class="container">
+  <mat-toolbar class="list-header" [style.background]="'#F7F8F8'">
+    <span>تسک های من</span>
+    <div>
+      <button mat-flat-button (click)="addTaskDialog()">
+        <mat-icon>add</mat-icon>
+        افزودن تسک
+      </button>
+    </div>
+  </mat-toolbar>
+  <div class="todo-cards-container">
+    <app-todo-list-cards [tasks]="tasks"></app-todo-list-cards>
+  </div>
+</div>

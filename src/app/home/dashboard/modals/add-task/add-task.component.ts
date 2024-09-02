@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TaskItem } from '../../models/task.model';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
-  styleUrl: './add-task.component.scss',
+  styleUrls: ['./add-task.component.scss'],
   providers: [DashboardService],
 })
 export class AddTaskComponent implements OnInit {
@@ -17,7 +17,8 @@ export class AddTaskComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     private snackBar: MatSnackBar,
-    private dialogRef: MatDialogRef<AddTaskComponent>
+    private dialogRef: MatDialogRef<AddTaskComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { listId: string }
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +31,7 @@ export class AddTaskComponent implements OnInit {
       description: new FormControl(null),
       done: new FormControl(false),
       date: new FormControl(new Date()),
-      list: new FormControl(null, Validators.required),
+      list: new FormControl(this.data.listId, Validators.required),
     });
   }
 
