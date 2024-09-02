@@ -1,4 +1,4 @@
-<ng-container class="container">
+<div class="container">
   @if (completedTasksList && completedTasksList.length > 0) {
   <div>
     @for (item of completedTasksList; track $index) {
@@ -12,7 +12,7 @@
         <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions>
-        <mat-icon class="icon">delete</mat-icon>
+        <mat-icon class="icon" (click)="deleteTask(item._id)">delete</mat-icon>
       </mat-card-actions>
     </mat-card>
     }
@@ -23,4 +23,4 @@
     <p>تسک انجام شده‌ای وجود ندارد.</p>
   </div>
   }
-</ng-container>
+</div>

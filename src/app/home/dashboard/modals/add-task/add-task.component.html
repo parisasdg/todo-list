@@ -1,4 +1,6 @@
-<h4 mat-dialog-title dir="rtl">افزودن تسک</h4>
+<h4 mat-dialog-title dir="rtl">
+  {{ data.isEdit ? "ویرایش تسک" : "افزودن تسک" }}
+</h4>
 <mat-dialog-content>
   <form class="example-form" [formGroup]="taskForm">
     <mat-form-field class="example-full-width">

@@ -9,6 +9,9 @@
     </div>
   </mat-toolbar>
   <div class="todo-cards-container">
-    <app-todo-list-cards [tasks]="tasks"></app-todo-list-cards>
+    <app-todo-list-cards
+      [tasks]="tasks"
+      (editTaskAction)="editTaskDialog($event)"
+    ></app-todo-list-cards>
   </div>
 </div>

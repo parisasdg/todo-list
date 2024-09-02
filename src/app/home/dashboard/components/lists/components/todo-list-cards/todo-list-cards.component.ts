@@ -1,4 +1,4 @@
-import { Component, Input, model } from '@angular/core';
+import { Component, EventEmitter, Input, model, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskItem } from 'src/app/home/dashboard/models/task.model';
 import { DashboardService } from 'src/app/home/dashboard/services/dashboard.service';
@@ -10,8 +10,7 @@ import { DashboardService } from 'src/app/home/dashboard/services/dashboard.serv
 })
 export class TodoListCardsComponent {
   @Input() tasks: TaskItem[] = [];
-  readonly checked = model(false);
-  readonly indeterminate = model(false);
+  @Output() editTaskAction: EventEmitter<TaskItem> = new EventEmitter();
   readonly labelPosition = model<'before' | 'after'>('after');
 
   listId: string = '';
@@ -25,10 +24,27 @@ export class TodoListCardsComponent {
     this.listId = this.route.snapshot.paramMap.get('id')!;
   }
 
+  updateTaskStatus(task: TaskItem) {
+    const updatedTask = { ...task, done: task.done };
+
+    this.dashboardService.updateTask(task._id, updatedTask).subscribe(
+      (res) => {
+        console.log('Task status updated successfully:', res);
+      },
+      (error) => {
+        console.error('Error updating task status:', error);
+      }
+    );
+  }
+
   deleteTask(taskId: string) {
     this.dashboardService.deleteTask(taskId).subscribe((res) => {
       this.tasks = this.tasks.filter((item) => item._id !== taskId);
       console.log('List item deleted successfully:', res);
     });
+  }
+
+  editTask(task: TaskItem) {
+    this.editTaskAction.emit(task);
   }
 }

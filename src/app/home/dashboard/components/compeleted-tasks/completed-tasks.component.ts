@@ -24,4 +24,13 @@ export class CompletedTasksComponent implements OnInit {
       this.completedTasksList = res;
     });
   }
+
+  deleteTask(taskId: string) {
+    this.dashboardService.deleteTask(taskId).subscribe((res) => {
+      this.completedTasksList = this.completedTasksList.filter(
+        (item) => item._id !== taskId
+      );
+      console.log('List item deleted successfully:', res);
+    });
+  }
 }

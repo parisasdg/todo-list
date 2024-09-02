@@ -49,7 +49,17 @@ export class TasksComponent implements OnInit {
 
   addTaskDialog() {
     const dialogRef = this.dialog.open(AddTaskComponent, {
-      data: { listId: this.listId },
+      data: { listId: this.listId, isEdit: false },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.loadTasks();
+    });
+  }
+
+  editTaskDialog(task: TaskItem) {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
+      data: { listId: this.listId, isEdit: true, task },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

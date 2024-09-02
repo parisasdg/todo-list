@@ -60,6 +60,7 @@ export class ListsComponent implements OnInit {
           this.list[index] = response;
           this.editingIndex = null;
           this.updatedTitle = '';
+          this.getLists();
         },
         (error) => {
           console.error('Error updating list:', error);

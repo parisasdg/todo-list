@@ -18,7 +18,8 @@ export class AddTaskComponent implements OnInit {
     private dashboardService: DashboardService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<AddTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { listId: string }
+    @Inject(MAT_DIALOG_DATA)
+    public data: { listId: string; isEdit: boolean; task?: TaskItem }
   ) {}
 
   ngOnInit(): void {
@@ -27,26 +28,50 @@ export class AddTaskComponent implements OnInit {
 
   private initForm(): void {
     this.taskForm = new FormGroup({
-      title: new FormControl(null, Validators.required),
-      description: new FormControl(null),
-      done: new FormControl(false),
-      date: new FormControl(new Date()),
+      title: new FormControl(
+        this.data.isEdit && this.data.task ? this.data.task.title : '',
+        Validators.required
+      ),
+      description: new FormControl(
+        this.data.isEdit && this.data.task ? this.data.task.description : ''
+      ),
+      done: new FormControl(
+        this.data.isEdit && this.data.task ? this.data.task.done : false
+      ),
+      date: new FormControl(
+        this.data.isEdit && this.data.task
+          ? new Date(this.data.task.date)
+          : new Date()
+      ),
       list: new FormControl(this.data.listId, Validators.required),
     });
   }
 
   onSubmit() {
     if (this.taskForm.valid) {
-      const newTask: TaskItem = this.taskForm.value;
+      const taskData: TaskItem = {
+        ...this.taskForm.value,
+        _id: this.data.isEdit ? this.data.task!._id : undefined,
+      };
 
-      this.dashboardService.addTask(newTask).subscribe(
+      const saveOperation = this.data.isEdit
+        ? this.dashboardService.updateTask(taskData._id!, taskData)
+        : this.dashboardService.addTask(taskData);
+
+      saveOperation.subscribe(
         (res) => {
-          this.showSuccessMessage('List added successfully!');
+          this.showSuccessMessage(
+            this.data.isEdit
+              ? 'Task updated successfully!'
+              : 'Task added successfully!'
+          );
           this.taskForm.reset();
           this.dialogRef.close(true);
         },
         (err) => {
-          this.showErrorMessage('Error adding list.');
+          this.showErrorMessage(
+            this.data.isEdit ? 'Error updating task.' : 'Error adding task.'
+          );
         }
       );
     }

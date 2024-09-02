@@ -56,6 +56,13 @@ export class DashboardService {
     return this.http.delete<any>(`${this.baseUrl}/tasks/${taskId}`);
   }
 
+  updateTask(taskId: string, updatedTask: TaskItem): Observable<TaskItem> {
+    return this.http.put<TaskItem>(
+      `${this.baseUrl}/tasks/${taskId}`,
+      updatedTask
+    );
+  }
+
   getAllTasks(): Observable<TaskItem[]> {
     return this.http.get<TaskItem[]>(`${this.baseUrl}/tasks`);
   }
