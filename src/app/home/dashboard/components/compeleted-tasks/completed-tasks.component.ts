@@ -1,6 +1,7 @@
 import { TaskItem } from '../../models/task.model';
 import { DashboardService } from './../../services/dashboard.service';
 import { Component, model, OnInit } from '@angular/core';
+import * as moment from 'moment-jalaali';
 
 @Component({
   selector: 'app-completed-tasks',
@@ -32,5 +33,11 @@ export class CompletedTasksComponent implements OnInit {
       );
       console.log('List item deleted successfully:', res);
     });
+  }
+
+  getTime(date: Date): string {
+    const momentDate = moment(date);
+    const jalaliDate = momentDate.locale('en').format('jYYYY/jMM/jDD');
+    return jalaliDate;
   }
 }

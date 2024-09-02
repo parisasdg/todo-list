@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, model, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskItem } from 'src/app/home/dashboard/models/task.model';
 import { DashboardService } from 'src/app/home/dashboard/services/dashboard.service';
-
+import * as moment from 'moment-jalaali';
 @Component({
   selector: 'app-todo-list-cards',
   templateUrl: './todo-list-cards.component.html',
@@ -46,5 +46,11 @@ export class TodoListCardsComponent {
 
   editTask(task: TaskItem) {
     this.editTaskAction.emit(task);
+  }
+
+  getTime(date: Date): string {
+    const momentDate = moment(date);
+    const jalaliDate = momentDate.locale('en').format('jYYYY/jMM/jDD');
+    return jalaliDate;
   }
 }

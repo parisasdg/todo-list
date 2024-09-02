@@ -8,7 +8,7 @@
           <span class="completed-task">Completed</span>
           {{ item.title }}</mat-card-title
         >
-        <span> {{ item.date }} </span>
+        <span> {{ getTime(item.date) }} </span>
         <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions>
